@@ -7,14 +7,16 @@ const AcpView: FC = () => {
 	const [submitMessage, setSubmitMessage] = useState("")
 
 	const onInputSubmit = () => {
-		shell.exec("git add .")
-		shell.exec(`git commit -m "${submitMessage}"`)
-		shell.exec("git push")
+		const result = shell.exec("git add .", { silent: true })
+    console.log('result', result);
+		shell.exec(`git commit -m "${submitMessage}"`, { silent: true })
+    shell.exec("git pull", { silent: true })
+		shell.exec("git push", { silent: true })
 	}
 
 	return (
 		<Box>
-			<Text>{submitMessage}请输入提交信息：</Text>
+			<Text>请输入提交信息：</Text>
 			<TextInput
 				value={submitMessage}
 				onChange={setSubmitMessage}
