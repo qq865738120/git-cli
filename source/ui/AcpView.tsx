@@ -25,8 +25,6 @@ const AcpView: FC = () => {
 			const result = shell.exec(index === 1 ? task(submitMessage) : task(), {
 				silent: true,
 			})
-			console.log("1111", result.code, result, submitMessage)
-
 			if (result.code === 0) {
 				setProgressText(task().substring(0, 8))
 				setTaskDone(taskDone.concat([task]))
