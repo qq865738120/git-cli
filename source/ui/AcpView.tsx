@@ -15,26 +15,26 @@ const AcpView: FC = () => {
 	useEffect(() => {
 		setTasks([
 			() => "git add .",
-			() => `git commit -m "${submitMessage}"`,
+			message => `git commit -m "${message}"`,
 			() => "git push",
 		])
 	}, [])
 
 	const onInputSubmit = () => {
-		tasks.map(task => {
-			const result = shell.exec(task(), { silent: true })
+		tasks.map((task, index) => {
+			const result = shell.exec(index === 1 ? task(submitMessage) : task(), {
+				silent: true,
+			})
+			console.log("1111", result.code, result, submitMessage)
+
 			if (result.code === 0) {
 				setProgressText(task().substring(0, 8))
 				setTaskDone(taskDone.concat([task]))
+				console.log("taskDone", taskDone)
 			} else {
-				exit(new Error(task() + "命令运行失败"))
+				exit(new Error(result.stderr))
 			}
 		})
-		const result = shell.exec("git add .", { silent: true })
-		console.log("result", result)
-		shell.exec(`git commit -m "${submitMessage}"`, { silent: true })
-		// shell.exec("git pull", { silent: true })
-		shell.exec("git push", { silent: true })
 	}
 
 	return (
@@ -45,7 +45,7 @@ const AcpView: FC = () => {
 				onChange={setSubmitMessage}
 				onSubmit={onInputSubmit}
 			/>
-			<Newline />
+			<Newline count={2} />
 			<Text>{progressText}</Text>
 			<ProgressBar
 				left={progressText.length}
