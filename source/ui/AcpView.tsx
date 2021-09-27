@@ -18,7 +18,7 @@ const AcpView: FC = () => {
 	useEffect(() => {
 		setTasks([
 			() => "git add .",
-			message => `git commit -m "${message}"`,
+			message => `git commit -m "${message || 'default'}"`,
 			() => "git push",
 		])
 	}, [])
