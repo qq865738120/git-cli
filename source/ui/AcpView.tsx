@@ -56,7 +56,7 @@ const AcpView: FC = () => {
 		<Box flexDirection='column'>
 			<Box>
 				<Box marginRight={1}>
-					<Text>请输入提交信息：</Text>
+					<Text>请输入提交信息：(default)</Text>
 				</Box>
 				<TextInput
 					value={submitMessage}
