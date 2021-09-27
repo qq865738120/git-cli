@@ -27,8 +27,8 @@ const AcpView: FC = () => {
 			})
 			if (result.code === 0) {
 				setProgressText(task().substring(0, 8))
-				setTaskDone(taskDone.concat([task]))
-				console.log("taskDone", taskDone, taskDone.concat([task]))
+				setTaskDone(taskDone.concat(task))
+				console.log("taskDone", taskDone, taskDone.concat(task))
 			} else {
 				exit(new Error(result.stderr))
 			}
