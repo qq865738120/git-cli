@@ -56,12 +56,12 @@ const AcpView: FC = () => {
 
 			{isLoading && (
 				<Box>
-					<Text>
-						<Text color='green'>
-							<Spinner type='dots' />
-						</Text>
-						<Box marginLeft={1}>{progressText}</Box>
+					<Text color='green'>
+						<Spinner type='dots' />
 					</Text>
+					<Box marginLeft={1}>
+						<Text>{progressText} </Text>
+					</Box>
 				</Box>
 			)}
 		</Box>
