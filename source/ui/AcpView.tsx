@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react"
-import { Box, Newline, Text, useApp } from "ink"
+import { Box, Text, useApp } from "ink"
 import TextInput from "ink-text-input"
-// import ProgressBar from "ink-progress-bar"
 import shell from "shelljs"
 import Spinner from "ink-spinner"
 // import logSymbols from "log-symbols"
@@ -11,6 +10,7 @@ const AcpView: FC = () => {
 	const [tasks, setTasks] = useState([] as ((params?: any) => string)[])
 	const [taskDone, setTaskDone] = useState([] as ((params?: any) => string)[])
 	const [progressText, setProgressText] = useState("")
+	const [isLoading, setIsLoading] = useState(false)
 	const { exit } = useApp()
 
 	useEffect(() => {
@@ -22,12 +22,14 @@ const AcpView: FC = () => {
 	}, [])
 
 	const onInputSubmit = () => {
+		setIsLoading(true)
 		tasks.map((task, index) => {
-			const result = shell.exec(index === 1 ? task(submitMessage) : task(), {
+			const taskStr = index === 1 ? task(submitMessage) : task()
+			const result = shell.exec(taskStr, {
 				silent: true,
 			})
 			if (result.code === 0) {
-				setProgressText(task().substring(0, 8))
+				setProgressText(taskStr)
 				taskDone.push(task)
 				setTaskDone(taskDone)
 				console.log("taskDone", taskDone)
@@ -35,6 +37,7 @@ const AcpView: FC = () => {
 				exit(new Error(result.stderr))
 			}
 		})
+		setIsLoading(false)
 		exit(new Error("成功"))
 	}
 
@@ -50,23 +53,17 @@ const AcpView: FC = () => {
 					onSubmit={onInputSubmit}
 				/>
 			</Box>
-			<Newline />
-			<Box>
-				<Text>
-					<Text color='green'>
-						<Spinner type='dots' />
+
+			{isLoading && (
+				<Box>
+					<Text>
+						<Text color='green'>
+							<Spinner type='dots' />
+						</Text>
+						<Box marginLeft={1}>{progressText}</Box>
 					</Text>
-					{progressText}
-				</Text>
-				{/* <Box marginRight={1}>
-					<Text>[{progressText}]</Text>
-				</Box> */}
-				{/* <ProgressBar
-					left={progressText.length}
-					percent={taskDone.length / tasks.length}
-				/> */}
-			</Box>
-			<Newline />
+				</Box>
+			)}
 		</Box>
 	)
 }
