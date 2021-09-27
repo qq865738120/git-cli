@@ -36,15 +36,7 @@ const AcpView: FC = () => {
 	}
 
 	return (
-		<Box>
-      <Box>
-				<Text>{progressText}</Text>
-				<ProgressBar
-					left={progressText.length}
-					percent={taskDone.length / tasks.length}
-				/>
-			</Box>
-			<Newline count={2} />
+		<Box flexDirection='column'>
 			<Box>
 				<Box marginRight={1}>
 					<Text>请输入提交信息：</Text>
@@ -55,7 +47,14 @@ const AcpView: FC = () => {
 					onSubmit={onInputSubmit}
 				/>
 			</Box>
-
+			<Newline count={2} />
+			<Box>
+				<Text>{progressText}</Text>
+				<ProgressBar
+					left={progressText.length}
+					percent={taskDone.length / tasks.length}
+				/>
+			</Box>
 		</Box>
 	)
 }
