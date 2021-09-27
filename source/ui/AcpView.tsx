@@ -26,6 +26,10 @@ const AcpView: FC = () => {
 	const onInputSubmit = () => {
 		setIsLoading(true)
 		tasks.map((task, index) => {
+      if (tipsType === 'error') {
+        return
+      }
+
 			const taskStr = index === 1 ? task(submitMessage) : task()
 			const result = shell.exec(taskStr, {
 				silent: true,
