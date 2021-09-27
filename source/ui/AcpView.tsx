@@ -27,12 +27,14 @@ const AcpView: FC = () => {
 			})
 			if (result.code === 0) {
 				setProgressText(task().substring(0, 8))
-				setTaskDone(taskDone.concat(task))
-				console.log("taskDone", taskDone, taskDone.concat(task))
+        taskDone.push(task)
+				setTaskDone(taskDone)
+				console.log("taskDone", taskDone)
 			} else {
 				exit(new Error(result.stderr))
 			}
 		})
+    exit(new Error('成功'))
 	}
 
 	return (
@@ -57,6 +59,7 @@ const AcpView: FC = () => {
 					percent={taskDone.length / tasks.length}
 				/>
 			</Box>
+      <Newline />
 		</Box>
 	)
 }
