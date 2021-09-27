@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react"
 import { Box, Text, useApp } from "ink"
 import TextInput from "ink-text-input"
 import shell from "shelljs"
-import Tips from "./components/Tips"
+import Tips, { ITipsPropsType } from "./components/Tips"
 import Loading from "./components/Loading"
 
 const AcpView: FC = () => {
@@ -12,6 +12,7 @@ const AcpView: FC = () => {
 	const [progressText, setProgressText] = useState("")
 	const [isLoading, setIsLoading] = useState(false)
 	const [isShowTips, setIsShowTips] = useState(false)
+	const [tipsType, setTipsType] = useState<ITipsPropsType>('success')
 	const { exit } = useApp()
 
 	useEffect(() => {
@@ -34,11 +35,14 @@ const AcpView: FC = () => {
 				taskDone.push(task)
 				setTaskDone(taskDone)
 			} else {
+        setTipsType('error')
+        setIsShowTips(true)
 				exit(new Error(result.stderr))
 				return
 			}
 		})
 		setIsLoading(false)
+    setTipsType('success')
 		setIsShowTips(true)
 		exit(new Error("成功"))
 	}
@@ -58,7 +62,7 @@ const AcpView: FC = () => {
 
 			{isLoading && <Loading>{progressText}</Loading>}
 
-			{isShowTips && <Tips />}
+			{isShowTips && <Tips type={tipsType} />}
 		</Box>
 	)
 }
