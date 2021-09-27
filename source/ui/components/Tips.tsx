@@ -10,8 +10,8 @@ export interface ITipsProps {
 const Tips: FC<ITipsProps> = ({ type = 'success' }) => {
 	return (
 		<Box>
-			{type === 'success' && <Text>✨ 成功</Text>}
-			{type === 'error' && <Text>✘ 出错了</Text>}
+			{type === 'success' && <><Text>✨</Text><Box marginLeft={1}>成功</Box></>}
+			{type === 'error' && <><Text>✘</Text><Box marginLeft={1}>出错了</Box></>}
 		</Box>
 	)
 }
