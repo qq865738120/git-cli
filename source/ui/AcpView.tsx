@@ -42,13 +42,14 @@ const AcpView: FC = () => {
         setTipsType('error')
         setIsShowTips(true)
 				exit(new Error(result.stderr))
-				return
+        process.exit(1)
 			}
 		})
 		setIsLoading(false)
     setTipsType('success')
 		setIsShowTips(true)
 		exit(new Error("成功"))
+    process.exit(0)
 	}
 
 	return (
