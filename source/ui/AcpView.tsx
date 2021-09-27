@@ -47,9 +47,11 @@ const AcpView: FC = () => {
 					onSubmit={onInputSubmit}
 				/>
 			</Box>
-			<Newline count={2} />
+			<Newline />
 			<Box>
-				<Text>{progressText}</Text>
+				<Box marginRight={1}>
+					<Text>{progressText}</Text>
+				</Box>
 				<ProgressBar
 					left={progressText.length}
 					percent={taskDone.length / tasks.length}
