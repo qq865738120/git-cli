@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from "react"
 import { Box, Newline, Text, useApp } from "ink"
 import TextInput from "ink-text-input"
-import ProgressBar from "ink-progress-bar"
+// import ProgressBar from "ink-progress-bar"
 import shell from "shelljs"
+import Spinner from "ink-spinner"
 // import logSymbols from "log-symbols"
 
 const AcpView: FC = () => {
@@ -27,14 +28,14 @@ const AcpView: FC = () => {
 			})
 			if (result.code === 0) {
 				setProgressText(task().substring(0, 8))
-        taskDone.push(task)
+				taskDone.push(task)
 				setTaskDone(taskDone)
 				console.log("taskDone", taskDone)
 			} else {
 				exit(new Error(result.stderr))
 			}
 		})
-    exit(new Error('成功'))
+		exit(new Error("成功"))
 	}
 
 	return (
@@ -51,15 +52,21 @@ const AcpView: FC = () => {
 			</Box>
 			<Newline />
 			<Box>
-				<Box marginRight={1}>
-					<Text>{progressText}</Text>
-				</Box>
-				<ProgressBar
+				<Text>
+					<Text color='green'>
+						<Spinner type='dots' />
+					</Text>
+					{progressText}
+				</Text>
+				{/* <Box marginRight={1}>
+					<Text>[{progressText}]</Text>
+				</Box> */}
+				{/* <ProgressBar
 					left={progressText.length}
 					percent={taskDone.length / tasks.length}
-				/>
+				/> */}
 			</Box>
-      <Newline />
+			<Newline />
 		</Box>
 	)
 }
