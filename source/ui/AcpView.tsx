@@ -39,18 +39,22 @@ const AcpView: FC = () => {
 
 	return (
 		<Box>
-			<Text>请输入提交信息：</Text>
-			<TextInput
-				value={submitMessage}
-				onChange={setSubmitMessage}
-				onSubmit={onInputSubmit}
-			/>
+			<Box>
+				<Text>请输入提交信息：</Text>
+				<TextInput
+					value={submitMessage}
+					onChange={setSubmitMessage}
+					onSubmit={onInputSubmit}
+				/>
+			</Box>
 			<Newline count={2} />
-			<Text>{progressText}</Text>
-			<ProgressBar
-				left={progressText.length}
-				percent={taskDone.length / tasks.length}
-			/>
+			<Box>
+				<Text>{progressText}</Text>
+				<ProgressBar
+					left={progressText.length}
+					percent={taskDone.length / tasks.length}
+				/>
+			</Box>
 		</Box>
 	)
 }
