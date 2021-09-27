@@ -2,8 +2,8 @@ import React, { FC, useEffect, useState } from "react"
 import { Box, Text, useApp } from "ink"
 import TextInput from "ink-text-input"
 import shell from "shelljs"
-import Spinner from "ink-spinner"
-// import logSymbols from "log-symbols"
+import Tips from "./components/Tips"
+import Loading from "./components/Loading"
 
 const AcpView: FC = () => {
 	const [submitMessage, setSubmitMessage] = useState("")
@@ -11,6 +11,7 @@ const AcpView: FC = () => {
 	const [taskDone, setTaskDone] = useState([] as ((params?: any) => string)[])
 	const [progressText, setProgressText] = useState("")
 	const [isLoading, setIsLoading] = useState(false)
+	const [isShowTips, setIsShowTips] = useState(false)
 	const { exit } = useApp()
 
 	useEffect(() => {
@@ -32,12 +33,13 @@ const AcpView: FC = () => {
 				setProgressText(taskStr)
 				taskDone.push(task)
 				setTaskDone(taskDone)
-				console.log("taskDone", taskDone)
 			} else {
 				exit(new Error(result.stderr))
+				return
 			}
 		})
 		setIsLoading(false)
+		setIsShowTips(true)
 		exit(new Error("成功"))
 	}
 
@@ -54,16 +56,9 @@ const AcpView: FC = () => {
 				/>
 			</Box>
 
-			{isLoading && (
-				<Box>
-					<Text color='green'>
-						<Spinner type='dots' />
-					</Text>
-					<Box marginLeft={1}>
-						<Text>{progressText} </Text>
-					</Box>
-				</Box>
-			)}
+			{isLoading && <Loading>{progressText}</Loading>}
+
+			{isShowTips && <Tips />}
 		</Box>
 	)
 }
