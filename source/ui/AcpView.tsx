@@ -12,13 +12,13 @@ const AcpView: FC = () => {
 	const [progressText, setProgressText] = useState("")
 	const [isLoading, setIsLoading] = useState(false)
 	const [isShowTips, setIsShowTips] = useState(false)
-	const [tipsType, setTipsType] = useState<ITipsPropsType>('success')
+	const [tipsType, setTipsType] = useState<ITipsPropsType>("success")
 	const { exit } = useApp()
 
 	useEffect(() => {
 		setTasks([
 			() => "git add .",
-			message => `git commit -m "${message || 'default'}"`,
+			message => `git commit -m "${message || "default"}"`,
 			() => "git pull",
 			() => "git push",
 		])
@@ -27,9 +27,9 @@ const AcpView: FC = () => {
 	const onInputSubmit = () => {
 		setIsLoading(true)
 		tasks.map((task, index) => {
-      if (tipsType === 'error') {
-        return
-      }
+			if (tipsType === "error") {
+				return
+			}
 
 			const taskStr = index === 1 ? task(submitMessage) : task()
 			const result = shell.exec(taskStr, {
@@ -40,17 +40,17 @@ const AcpView: FC = () => {
 				taskDone.push(task)
 				setTaskDone(taskDone)
 			} else {
-        setTipsType('error')
-        setIsShowTips(true)
+				setTipsType("error")
+				setIsShowTips(true)
 				exit(new Error(result.stderr))
-        process.exit(1)
+				process.exit(1)
 			}
 		})
 		setIsLoading(false)
-    setTipsType('success')
+		setTipsType("success")
 		setIsShowTips(true)
 		exit(new Error("成功"))
-    process.exit(0)
+		process.exit(0)
 	}
 
 	return (
