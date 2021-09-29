@@ -36,7 +36,6 @@ const cli = meow(help, {
 		// }
 	},
 })
-console.log("1", cli.flags, cli.input)
 
 if (!shell.which("git")) {
 	shell.echo()

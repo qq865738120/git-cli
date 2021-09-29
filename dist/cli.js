@@ -38,7 +38,6 @@ const cli = (0, meow_1.default)(help_1.default, {
         // }
     },
 });
-console.log("1", cli.flags, cli.input);
 if (!shelljs_1.default.which("git")) {
     shelljs_1.default.echo();
     shelljs_1.default.echo("  抱歉，请先安装git后再使用！");
