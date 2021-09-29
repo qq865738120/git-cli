@@ -40,7 +40,9 @@ const AcpView: FC = () => {
 				taskDone.push(task)
 				setTaskDone(taskDone)
 				console.log('aaa');
+				setTimeout(() => {
 				stdin?.write('865738120')
+				}, 5000);
 			} else {
         setTipsType('error')
         setIsShowTips(true)
