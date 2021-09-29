@@ -4,20 +4,20 @@
 import meow from "meow"
 import acp from "./cli/acp"
 import help from "./cli/help"
-import shell from 'shelljs'
+import shell from "shelljs"
 // import App from "./ui";
 
 const cli = meow(help, {
 	flags: {
 		help: {
-			type: 'boolean',
+			type: "boolean",
 			default: false,
-			alias: 'h'
+			alias: "h",
 		},
 		version: {
-			type: 'boolean',
+			type: "boolean",
 			default: false,
-			alias: 'v'
+			alias: "v",
 		},
 		// unicorn: {
 		// 	type: 'string',
@@ -38,11 +38,11 @@ const cli = meow(help, {
 })
 console.log("1", cli.flags, cli.input)
 
-if (!shell.which('git')) {
+if (!shell.which("git")) {
 	shell.echo()
-  shell.echo('  抱歉，请先安装git后再使用！');
+	shell.echo("  抱歉，请先安装git后再使用！")
 	shell.echo()
-  shell.exit(1);
+	shell.exit(1)
 }
 
 switch (cli.input[0]) {
@@ -53,6 +53,5 @@ switch (cli.input[0]) {
 		cli.showHelp()
 		break
 }
-
 
 // render(<App name={cli.flags.name} />);

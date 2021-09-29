@@ -14,14 +14,14 @@ const shelljs_1 = __importDefault(require("shelljs"));
 const cli = (0, meow_1.default)(help_1.default, {
     flags: {
         help: {
-            type: 'boolean',
+            type: "boolean",
             default: false,
-            alias: 'h'
+            alias: "h",
         },
         version: {
-            type: 'boolean',
+            type: "boolean",
             default: false,
-            alias: 'v'
+            alias: "v",
         },
         // unicorn: {
         // 	type: 'string',
@@ -39,9 +39,9 @@ const cli = (0, meow_1.default)(help_1.default, {
     },
 });
 console.log("1", cli.flags, cli.input);
-if (!shelljs_1.default.which('git')) {
+if (!shelljs_1.default.which("git")) {
     shelljs_1.default.echo();
-    shelljs_1.default.echo('  抱歉，请先安装git后再使用！');
+    shelljs_1.default.echo("  抱歉，请先安装git后再使用！");
     shelljs_1.default.echo();
     shelljs_1.default.exit(1);
 }
