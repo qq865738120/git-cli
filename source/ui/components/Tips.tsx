@@ -20,7 +20,7 @@ const Tips: FC<ITipsProps> = ({ type = "success" }) => {
 			)}
 			{type === "error" && (
 				<>
-					<Text>✘</Text>
+					<Text color='red'>✘</Text>
 					<Box marginLeft={1}>
 						<Text>出错了</Text>
 					</Box>

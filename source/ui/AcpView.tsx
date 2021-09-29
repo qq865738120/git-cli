@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react"
-import { Box, Text, useApp, useStdin } from "ink"
+import { Box, Text, useApp } from "ink"
 import TextInput from "ink-text-input"
 import shell from "shelljs"
 import Tips, { ITipsPropsType } from "./components/Tips"
@@ -14,7 +14,6 @@ const AcpView: FC = () => {
 	const [isShowTips, setIsShowTips] = useState(false)
 	const [tipsType, setTipsType] = useState<ITipsPropsType>('success')
 	const { exit } = useApp()
-	const  { stdin }  =  useStdin()
 
 	useEffect(() => {
 		setTasks([
@@ -39,10 +38,6 @@ const AcpView: FC = () => {
 				setProgressText(taskStr)
 				taskDone.push(task)
 				setTaskDone(taskDone)
-				console.log('aaa');
-				setTimeout(() => {
-				stdin?.write('865738120')
-				}, 5000);
 			} else {
         setTipsType('error')
         setIsShowTips(true)
