@@ -19,6 +19,7 @@ const AcpView: FC = () => {
 		setTasks([
 			() => "git add .",
 			message => `git commit -m "${message || 'default'}"`,
+			() => "git pull",
 			() => "git push",
 		])
 	}, [])
