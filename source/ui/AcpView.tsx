@@ -39,6 +39,7 @@ const AcpView: FC = () => {
 				setProgressText(taskStr)
 				taskDone.push(task)
 				setTaskDone(taskDone)
+				console.log('aaa');
 				stdin?.write('865738120')
 			} else {
         setTipsType('error')
